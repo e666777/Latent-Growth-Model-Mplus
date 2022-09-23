@@ -1,0 +1,26 @@
+Title：线性增长模型的检验;
+DATA:
+    FILE IS ;
+Variable:
+    NAME ARE   ;
+    USEVAR ARE   ;
+ANALYSIS:
+    TYPE = MEANSTRUCTURE;
+MODEL:
+     INTERCEPT BY T1@1 T2@1 T3@1;
+!截距的方差
+     INTERCEPT; 
+!U1
+     [INTERCEPT];
+     slope by T1@0 T2@1 T3@2;
+     slope;
+     [slope];
+!截距和斜率的协方差     
+     INTERCEPT WITH SLOPE;
+    
+     T1 (1);
+     T2 (1);
+     T3 (1);
+     [T1@0 T2@0 T3@0];
+OUTPUT:
+     TECH1 TECH4 SAMPSTAT; 
